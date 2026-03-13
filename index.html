@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Intern Log - Week 01</title>
+    <style>
+        /* CSS INTEGRATO */
+        body {
+            background: #0d0208;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .terminal {
+            border: 2px solid #00ff41;
+            padding: 30px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+            background: rgba(0, 0, 0, 0.95);
+            margin-top: 20px;
+        }
+
+        header {
+            border-bottom: 2px solid #00ff41;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+        }
+
+        h1 { font-size: 1.4rem; margin: 0; letter-spacing: 2px; }
+
+        .stats { font-size: 0.85rem; color: #008f11; margin-top: 8px; font-weight: bold; }
+
+        details {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        details:hover {
+            background: rgba(0, 255, 65, 0.1);
+            border-color: #00ff41;
+        }
+
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            outline: none;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .tag-success { background: #00ff41; color: #000; }
+        .tag-info { border: 1px solid #00ff41; color: #00ff41; }
+        .tag-warn { background: #ff3e3e; color: #fff; }
+
+        p { color: #ccd5cc; font-size: 0.95rem; margin: 15px 0 5px 0; line-height: 1.5; }
+
+        .mood {
+            color: #00ff41;
+            font-style: italic;
+            font-size: 0.9rem;
+            border-top: 1px dashed rgba(0, 255, 65, 0.3);
+            padding-top: 12px;
+            margin-top: 12px;
+            display: block;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #008f11;
+            letter-spacing: 1px;
+        }
+
+        strong { color: #fff; text-shadow: 0 0 5px #00ff41; }
+
+        /* Animazione cursore */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background: #00ff41;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="terminal">
+  <header>
+    <h1>> AI_INTERN_LOG_W01<span class="cursor"></span></h1>
+    <p>User: Davide | Environment: Skilla AI Team</p>
+    <div class="stats">
+      <span>EXP: [||||||----] 60%</span> | <span>Status: ✨ Enthusiastic</span>
+    </div>
+  </header>
+
+  <main>
+    <details open>
+      <summary>LUNEDÌ: System Booting <span class="tag tag-success">EMOTIONAL</span></summary>
+      <p><strong>Attività:</strong> Onboarding, setup dispositivi e mail aziendale. Prima partecipazione alle call sui <strong>Simulatori AI</strong>.</p>
+      <span class="mood">> LOG: Primo giorno intenso. Emozione alle stelle per l'inizio di questa avventura. Molte info, ma il feeling è ottimo!</span>
+    </details>
+
+    <details>
+      <summary>MARTEDÌ: Logic & Priority <span class="tag tag-info">LEARNING</span></summary>
+      <p><strong>Attività:</strong> Webinar Problem Solving (Matrice Eisenhower) e corsi sicurezza obbligatori su SkillaCloud.</p>
+      <span class="mood">> LOG: Ho imparato che prioritizzare è fondamentale. Anche se i corsi sicurezza sono densi, la testa è già ai progetti AI.</span>
+    </details>
+
+    <details>
+      <summary>MERCOLEDÌ: Firewall Phase <span class="tag tag-warn">BORING</span></summary>
+      <p><strong>Attività:</strong> Corso Cyberserenity.</p>
+      <span class="mood">> LOG: Livelli di noia rilevati sopra la soglia critica. Protocollo di pazienza attivato per completare la compliance.</span>
+    </details>
+
+    <details>
+      <summary>GIOVEDÌ: Neural Clarity <span class="tag tag-success">BREAKTHROUGH</span></summary>
+      <p><strong>Attività:</strong> Riunione Simulatore Ari, feedback tecnici e corso GDPR.</p>
+      <span class="mood">> LOG: Finalmente tutto chiaro! La call con Ari è stata il "click" che serviva per capire la logica dei simulatori. Super soddisfatto.</span>
+    </details>
+
+    <details>
+      <summary>VENERDÌ: Future Loading... <span class="tag tag-info">READY</span></summary>
+      <p><strong>Attività:</strong> Feedback Video AI e inizio corso "Saper comunicare" per il <strong>Simulatore Marta</strong>.</p>
+      <span class="mood">> LOG: Chiudo la settimana col botto. Non vedo l'ora di mettere le mani su Marta e vedere come evolve il training.</span>
+    </details>
+  </main>
+
+  <footer>
+    <p>_End of week 1: System stable. Next sync: Monday_</p>
+  </footer>
+</div>
+
+</body>
+</html>
