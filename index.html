@@ -7,16 +7,19 @@
     <style>
         /* TEMA SKILLA: Blu, Azzurro, Bianco, Viola Scuro */
         :root {
-            --bg-color: #050514; /* Blu/Viola scurissimo */
-            --primary-blue: #0d6efd; /* Blu classico */
-            --glow-cyan: #00e5ff; /* Azzurro luminoso */
-            --dark-purple: #4a00e0; /* Viola scuro */
-            --text-white: #f8f9fa; /* Bianco */
-            --text-muted: #a0aec0; /* Grigio chiaro per i testi lunghi */
+            --bg-color: #050514; 
+            --primary-blue: #0d6efd; 
+            --glow-cyan: #00e5ff; 
+            --dark-purple: #4a00e0; 
+            --text-white: #f8f9fa; 
+            --text-muted: #a0aec0; 
         }
 
+        /* Sfondo animato (Respiro AI) */
         body {
-            background: linear-gradient(135deg, var(--bg-color) 0%, #0a0b1e 100%);
+            background: linear-gradient(-45deg, #050514, #0a0b1e, #130930, #09122b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: var(--text-white);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -26,29 +29,31 @@
             min-height: 100vh;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .terminal {
             border: 2px solid var(--primary-blue);
             padding: 30px;
             width: 100%;
             max-width: 750px;
-            box-shadow: 0 0 25px rgba(13, 110, 253, 0.3), inset 0 0 15px rgba(74, 0, 224, 0.2);
+            box-shadow: 0 0 30px rgba(13, 110, 253, 0.4), inset 0 0 20px rgba(74, 0, 224, 0.3);
             background: rgba(5, 5, 20, 0.85);
             border-radius: 12px;
             margin-top: 10px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
         }
 
         header {
-            border-bottom: 2px solid var(--dark-purple);
+            border-bottom: 2px dashed var(--dark-purple);
             margin-bottom: 25px;
             padding-bottom: 20px;
         }
 
         /* Effetto Macchina da Scrivere */
-        .typewriter {
-            display: inline-block;
-        }
-        
         .typewriter h1 {
             color: var(--glow-cyan);
             font-size: 1.6rem;
@@ -59,23 +64,13 @@
             white-space: nowrap;
             border-right: 3px solid var(--text-white);
             animation: typing 2s steps(30, end), blink-caret .75s step-end infinite;
+            text-shadow: 0 0 10px var(--glow-cyan);
         }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--text-white) }
-        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--text-white) } }
 
-        .user-info {
-            font-size: 0.95rem;
-            color: var(--text-white);
-            margin-top: 12px;
-            font-weight: 500;
-        }
+        .user-info { font-size: 0.95rem; color: var(--text-white); margin-top: 12px; font-weight: 500; }
 
         /* Timeline 12 Settimane */
         .timeline-container {
@@ -87,91 +82,82 @@
         }
 
         .timeline-header {
+            display: flex; justify-content: space-between; font-size: 0.85rem;
+            color: var(--glow-cyan); font-weight: bold; margin-bottom: 10px;
+        }
+
+        .timeline-slots { display: flex; justify-content: space-between; gap: 5px; }
+        .slot { height: 12px; flex-grow: 1; background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
+        .slot.active { background: var(--glow-cyan); box-shadow: 0 0 10px var(--glow-cyan); }
+
+        /* NUOVO: Achievements */
+        .achievements {
+            margin-top: 20px;
             display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--glow-cyan);
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(74, 0, 224, 0.3);
+            border: 1px solid var(--glow-cyan);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            color: var(--glow-cyan);
+            box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
+            transition: all 0.3s ease;
         }
+        .badge:hover { transform: scale(1.1); background: var(--glow-cyan); color: #000; cursor: pointer; }
 
-        .timeline-slots {
-            display: flex;
-            justify-content: space-between;
-            gap: 5px;
-        }
-
-        .slot {
-            height: 12px;
-            flex-grow: 1;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-        }
-
-        .slot.active {
-            background: var(--glow-cyan);
-            box-shadow: 0 0 10px var(--glow-cyan);
-        }
-
-        /* Stile dei giorni */
-        details {
-            margin-bottom: 15px;
+        /* NUOVO: Skill Bars */
+        .skills-matrix {
+            margin-top: 20px;
+            background: rgba(13, 110, 253, 0.05);
             padding: 15px;
-            background: rgba(74, 0, 224, 0.1); /* Sfondo viola leggero */
+            border-radius: 8px;
+            border: 1px solid rgba(13, 110, 253, 0.2);
+        }
+        .skill-row { margin-bottom: 8px; }
+        .skill-name { font-size: 0.8rem; color: var(--text-white); margin-bottom: 4px; display: flex; justify-content: space-between;}
+        .skill-bar-bg { background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; }
+        .skill-bar-fill { height: 100%; background: var(--glow-cyan); border-radius: 4px; box-shadow: 0 0 10px var(--glow-cyan); }
+        
+        /* Animazione caricamento barre */
+        .fill-30 { width: 0; animation: fill30 1.5s ease forwards 0.5s; }
+        .fill-60 { width: 0; animation: fill60 1.5s ease forwards 0.5s; }
+        .fill-90 { width: 0; animation: fill90 1.5s ease forwards 0.5s; }
+        @keyframes fill30 { to { width: 30%; } }
+        @keyframes fill60 { to { width: 60%; } }
+        @keyframes fill90 { to { width: 90%; } }
+
+        /* Stile dei giorni con Hover 3D */
+        details {
+            margin-bottom: 15px; padding: 15px;
+            background: rgba(74, 0, 224, 0.1); 
             border: 1px solid rgba(13, 110, 253, 0.3);
             border-radius: 8px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         details:hover {
             background: rgba(13, 110, 253, 0.15);
             border-color: var(--glow-cyan);
+            transform: translateX(8px); /* Effetto scatto in avanti */
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.5);
         }
 
-        summary {
-            font-weight: bold;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            outline: none;
-            font-size: 1.05rem;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
+        summary { font-weight: bold; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem; }
+        
+        .tag { font-size: 0.7rem; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
         .tag-success { background: var(--glow-cyan); color: #000; }
         .tag-info { border: 1px solid var(--glow-cyan); color: var(--glow-cyan); }
         .tag-warn { background: var(--dark-purple); color: var(--text-white); }
 
         p { color: var(--text-muted); font-size: 0.95rem; margin: 15px 0 5px 0; line-height: 1.6; }
+        .mood { color: var(--glow-cyan); font-style: italic; font-size: 0.9rem; border-top: 1px dashed rgba(0, 229, 255, 0.3); padding-top: 12px; margin-top: 12px; display: block; }
 
-        .mood {
-            color: var(--glow-cyan);
-            font-style: italic;
-            font-size: 0.9rem;
-            border-top: 1px dashed rgba(0, 229, 255, 0.3);
-            padding-top: 12px;
-            margin-top: 12px;
-            display: block;
-        }
-
-        footer {
-            margin-top: 40px;
-            font-size: 0.8rem;
-            text-align: center;
-            color: var(--primary-blue);
-            letter-spacing: 1px;
-        }
-
+        footer { margin-top: 40px; font-size: 0.8rem; text-align: center; color: var(--primary-blue); letter-spacing: 1px; }
         strong { color: var(--text-white); font-weight: 600; }
     </style>
 </head>
@@ -183,28 +169,42 @@
         <h1>> SKILLA_AI_LOG_W01</h1>
     </div>
     <div class="user-info">
-      🧑‍💻 User: Davide | 🏢 Team: AI Skilla | ✨ Status: Enthusiastic
+      🧑‍💻 User: Davide | 🏢 Team: AI Skilla | ✨ Status: Ready for Training
     </div>
     
     <div class="timeline-container">
         <div class="timeline-header">
-            <span>🗓️ 09 Mar (Inizio)</span>
+            <span>🗓️ 09 Mar</span>
             <span>Internship Timeline</span>
-            <span>27 Mag ✈️🥲 (Fine)</span>
+            <span>27 Mag ✈️🥲</span>
         </div>
         <div class="timeline-slots">
             <div class="slot active" title="Settimana 1 completata!"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
-            <div class="slot"></div>
+            <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+            <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+            <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+            <div class="slot"></div><div class="slot"></div>
+        </div>
+    </div>
+
+    <div class="achievements">
+        <div class="badge" title="Hai completato la compliance!">🛡️ Cyber-Survivor</div>
+        <div class="badge" title="Hai applicato la Matrice di Eisenhower!">🧠 Prioritizer Pro</div>
+        <div class="badge" title="Hai sbloccato le logiche di Ari!">🗣️ AI Whisperer</div>
+    </div>
+
+    <div class="skills-matrix">
+        <div class="skill-row">
+            <div class="skill-name"><span>Logica Simulatori AI</span> <span>30%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill fill-30"></div></div>
+        </div>
+        <div class="skill-row">
+            <div class="skill-name"><span>Problem Solving & Priorità</span> <span>60%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill fill-60"></div></div>
+        </div>
+        <div class="skill-row">
+            <div class="skill-name"><span>Pazienza Zen (Corsi Sicurezza)</span> <span>90%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill fill-90"></div></div>
         </div>
     </div>
   </header>
@@ -218,31 +218,31 @@
 
     <details>
       <summary>MARTEDÌ: Logic & Priority 🧠 <span class="tag tag-info">LEARNING</span></summary>
-      <p><strong>Attività:</strong> Webinar Problem Solving (Matrice Eisenhower 📊) e corsi sicurezza obbligatori su SkillaCloud.</p>
-      <span class="mood">> LOG: Ho imparato che prioritizzare è fondamentale nel lavoro e nella vita. Anche se i corsi sicurezza sono densi, la testa è già ai progetti AI 💭.</span>
+      <p><strong>Attività:</strong> Webinar Problem Solving (Matrice Eisenhower 📊) e corsi sicurezza obbligatori.</p>
+      <span class="mood">> LOG: Ho imparato che prioritizzare è fondamentale. Anche se i corsi sicurezza sono densi, la testa è già ai progetti AI 💭.</span>
     </details>
 
     <details>
       <summary>MERCOLEDÌ: Firewall Phase 🛡️ <span class="tag tag-warn">BORING</span></summary>
       <p><strong>Attività:</strong> Corso Cyberserenity 🔒.</p>
-      <span class="mood">> LOG: Livelli di noia rilevati sopra la soglia critica 😴. Protocollo di pazienza attivato per completare la compliance obbligatoria.</span>
+      <span class="mood">> LOG: Livelli di noia rilevati sopra la soglia critica 😴. Protocollo di pazienza attivato per completare la compliance.</span>
     </details>
 
     <details>
       <summary>GIOVEDÌ: Neural Clarity 💡 <span class="tag tag-success">BREAKTHROUGH</span></summary>
       <p><strong>Attività:</strong> Riunione Simulatore Ari 🗣️, feedback tecnici e corso GDPR.</p>
-      <span class="mood">> LOG: Call illuminante! La call con Ari è stata il "click" che serviva per capire la logica dei simulatori. Super soddisfatto 💪.</span>
+      <span class="mood">> LOG: Finalmente tutto chiaro! La call con Ari è stata il "click" che serviva per capire la logica dei simulatori 💪.</span>
     </details>
 
     <details>
       <summary>VENERDÌ: Future Loading... 🔮 <span class="tag tag-info">READY</span></summary>
       <p><strong>Attività:</strong> Feedback Video AI 📹 e inizio corso "Saper comunicare" per il <strong>Simulatore Marta</strong>.</p>
-      <span class="mood">> LOG: Chiudo la settimana col botto 🔥. Non vedo l'ora di provare Marta e vedere come evolve il training dalla prossima settimana!</span>
+      <span class="mood">> LOG: Chiudo la settimana col botto 🔥. Non vedo l'ora di mettere le mani su Marta dalla prossima settimana!</span>
     </details>
   </main>
 
   <footer>
-    <p>_End of week 1: System stable. Next sync: Monday_ 🌍</p>
+    <p>_End of week 1: Database Saved. See you on Monday_ 🌍</p>
   </footer>
 </div>
 
