@@ -5,49 +5,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Intern Log - Week 01</title>
     <style>
-        /* CSS INTEGRATO */
+        /* TEMA SKILLA: Blu, Azzurro, Bianco, Viola Scuro */
+        :root {
+            --bg-color: #050514; /* Blu/Viola scurissimo */
+            --primary-blue: #0d6efd; /* Blu classico */
+            --glow-cyan: #00e5ff; /* Azzurro luminoso */
+            --dark-purple: #4a00e0; /* Viola scuro */
+            --text-white: #f8f9fa; /* Bianco */
+            --text-muted: #a0aec0; /* Grigio chiaro per i testi lunghi */
+        }
+
         body {
-            background: #0d0208;
-            color: #00ff41;
-            font-family: 'Courier New', Courier, monospace;
+            background: linear-gradient(135deg, var(--bg-color) 0%, #0a0b1e 100%);
+            color: var(--text-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             padding: 20px;
             margin: 0;
+            min-height: 100vh;
         }
 
         .terminal {
-            border: 2px solid #00ff41;
+            border: 2px solid var(--primary-blue);
             padding: 30px;
             width: 100%;
-            max-width: 700px;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
-            background: rgba(0, 0, 0, 0.95);
-            margin-top: 20px;
+            max-width: 750px;
+            box-shadow: 0 0 25px rgba(13, 110, 253, 0.3), inset 0 0 15px rgba(74, 0, 224, 0.2);
+            background: rgba(5, 5, 20, 0.85);
+            border-radius: 12px;
+            margin-top: 10px;
+            backdrop-filter: blur(5px);
         }
 
         header {
-            border-bottom: 2px solid #00ff41;
+            border-bottom: 2px solid var(--dark-purple);
             margin-bottom: 25px;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
         }
 
-        h1 { font-size: 1.4rem; margin: 0; letter-spacing: 2px; }
+        /* Effetto Macchina da Scrivere */
+        .typewriter {
+            display: inline-block;
+        }
+        
+        .typewriter h1 {
+            color: var(--glow-cyan);
+            font-size: 1.6rem;
+            margin: 0;
+            letter-spacing: 2px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--text-white);
+            animation: typing 2s steps(30, end), blink-caret .75s step-end infinite;
+        }
 
-        .stats { font-size: 0.85rem; color: #008f11; margin-top: 8px; font-weight: bold; }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--text-white) }
+        }
 
+        .user-info {
+            font-size: 0.95rem;
+            color: var(--text-white);
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        /* Timeline 12 Settimane */
+        .timeline-container {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--glow-cyan);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-slots {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        .slot {
+            height: 12px;
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .slot.active {
+            background: var(--glow-cyan);
+            box-shadow: 0 0 10px var(--glow-cyan);
+        }
+
+        /* Stile dei giorni */
         details {
             margin-bottom: 15px;
             padding: 15px;
-            background: rgba(0, 255, 65, 0.05);
-            border: 1px solid rgba(0, 255, 65, 0.1);
+            background: rgba(74, 0, 224, 0.1); /* Sfondo viola leggero */
+            border: 1px solid rgba(13, 110, 253, 0.3);
             border-radius: 8px;
             transition: all 0.3s;
         }
 
         details:hover {
-            background: rgba(0, 255, 65, 0.1);
-            border-color: #00ff41;
+            background: rgba(13, 110, 253, 0.15);
+            border-color: var(--glow-cyan);
         }
 
         summary {
@@ -58,27 +136,29 @@
             justify-content: space-between;
             align-items: center;
             outline: none;
+            font-size: 1.05rem;
         }
 
         .tag {
-            font-size: 0.65rem;
-            padding: 3px 8px;
-            border-radius: 4px;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
             text-transform: uppercase;
-            font-weight: 900;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .tag-success { background: #00ff41; color: #000; }
-        .tag-info { border: 1px solid #00ff41; color: #00ff41; }
-        .tag-warn { background: #ff3e3e; color: #fff; }
+        .tag-success { background: var(--glow-cyan); color: #000; }
+        .tag-info { border: 1px solid var(--glow-cyan); color: var(--glow-cyan); }
+        .tag-warn { background: var(--dark-purple); color: var(--text-white); }
 
-        p { color: #ccd5cc; font-size: 0.95rem; margin: 15px 0 5px 0; line-height: 1.5; }
+        p { color: var(--text-muted); font-size: 0.95rem; margin: 15px 0 5px 0; line-height: 1.6; }
 
         .mood {
-            color: #00ff41;
+            color: var(--glow-cyan);
             font-style: italic;
             font-size: 0.9rem;
-            border-top: 1px dashed rgba(0, 255, 65, 0.3);
+            border-top: 1px dashed rgba(0, 229, 255, 0.3);
             padding-top: 12px;
             margin-top: 12px;
             display: block;
@@ -86,77 +166,83 @@
 
         footer {
             margin-top: 40px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-align: center;
-            color: #008f11;
+            color: var(--primary-blue);
             letter-spacing: 1px;
         }
 
-        strong { color: #fff; text-shadow: 0 0 5px #00ff41; }
-
-        /* Animazione cursore */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 18px;
-            background: #00ff41;
-            margin-left: 5px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
+        strong { color: var(--text-white); font-weight: 600; }
     </style>
 </head>
 <body>
 
 <div class="terminal">
   <header>
-    <h1>> AI_INTERN_LOG_W01<span class="cursor"></span></h1>
-    <p>User: Davide | Environment: Skilla AI Team</p>
-    <div class="stats">
-      <span>EXP: [||||||----] 60%</span> | <span>Status: ✨ Enthusiastic</span>
+    <div class="typewriter">
+        <h1>> SKILLA_AI_LOG_W01</h1>
+    </div>
+    <div class="user-info">
+      🧑‍💻 User: Davide | 🏢 Team: AI Skilla | ✨ Status: Enthusiastic
+    </div>
+    
+    <div class="timeline-container">
+        <div class="timeline-header">
+            <span>🗓️ 09 Mar (Inizio)</span>
+            <span>Internship Timeline</span>
+            <span>27 Mag ✈️🥲 (Fine)</span>
+        </div>
+        <div class="timeline-slots">
+            <div class="slot active" title="Settimana 1 completata!"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+        </div>
     </div>
   </header>
 
   <main>
     <details open>
-      <summary>LUNEDÌ: System Booting <span class="tag tag-success">EMOTIONAL</span></summary>
-      <p><strong>Attività:</strong> Onboarding, setup dispositivi e mail aziendale. Prima partecipazione alle call sui <strong>Simulatori AI</strong>.</p>
-      <span class="mood">> LOG: Primo giorno intenso. Emozione alle stelle per l'inizio di questa avventura. Molte info, ma il feeling è ottimo!</span>
+      <summary>LUNEDÌ: System Booting 🚀 <span class="tag tag-success">EMOTIONAL</span></summary>
+      <p><strong>Attività:</strong> Onboarding, setup dispositivi e mail aziendale. Prima partecipazione alle call sui <strong>Simulatori AI</strong> 🤖.</p>
+      <span class="mood">> LOG: Primo giorno intenso! Emozione alle stelle per l'inizio di questa avventura. Molte info da elaborare, ma il feeling è ottimo 🤩.</span>
     </details>
 
     <details>
-      <summary>MARTEDÌ: Logic & Priority <span class="tag tag-info">LEARNING</span></summary>
-      <p><strong>Attività:</strong> Webinar Problem Solving (Matrice Eisenhower) e corsi sicurezza obbligatori su SkillaCloud.</p>
-      <span class="mood">> LOG: Ho imparato che prioritizzare è fondamentale. Anche se i corsi sicurezza sono densi, la testa è già ai progetti AI.</span>
+      <summary>MARTEDÌ: Logic & Priority 🧠 <span class="tag tag-info">LEARNING</span></summary>
+      <p><strong>Attività:</strong> Webinar Problem Solving (Matrice Eisenhower 📊) e corsi sicurezza obbligatori su SkillaCloud.</p>
+      <span class="mood">> LOG: Ho imparato che prioritizzare è fondamentale nel lavoro e nella vita. Anche se i corsi sicurezza sono densi, la testa è già ai progetti AI 💭.</span>
     </details>
 
     <details>
-      <summary>MERCOLEDÌ: Firewall Phase <span class="tag tag-warn">BORING</span></summary>
-      <p><strong>Attività:</strong> Corso Cyberserenity.</p>
-      <span class="mood">> LOG: Livelli di noia rilevati sopra la soglia critica. Protocollo di pazienza attivato per completare la compliance.</span>
+      <summary>MERCOLEDÌ: Firewall Phase 🛡️ <span class="tag tag-warn">BORING</span></summary>
+      <p><strong>Attività:</strong> Corso Cyberserenity 🔒.</p>
+      <span class="mood">> LOG: Livelli di noia rilevati sopra la soglia critica 😴. Protocollo di pazienza attivato per completare la compliance obbligatoria.</span>
     </details>
 
     <details>
-      <summary>GIOVEDÌ: Neural Clarity <span class="tag tag-success">BREAKTHROUGH</span></summary>
-      <p><strong>Attività:</strong> Riunione Simulatore Ari, feedback tecnici e corso GDPR.</p>
-      <span class="mood">> LOG: Call illuminante! La call con Ari è stata il "click" che serviva per capire la logica dei simulatori. Super soddisfatto.</span>
+      <summary>GIOVEDÌ: Neural Clarity 💡 <span class="tag tag-success">BREAKTHROUGH</span></summary>
+      <p><strong>Attività:</strong> Riunione Simulatore Ari 🗣️, feedback tecnici e corso GDPR.</p>
+      <span class="mood">> LOG: Finalmente tutto chiaro! La call con Ari è stata il "click" che serviva per capire la logica dei simulatori. Super soddisfatto 💪.</span>
     </details>
 
     <details>
-      <summary>VENERDÌ: Future Loading... <span class="tag tag-info">READY</span></summary>
-      <p><strong>Attività:</strong> Feedback Video AI e inizio corso "Saper comunicare" per il <strong>Simulatore Marta</strong>.</p>
-      <span class="mood">> LOG: Chiudo la settimana col botto. Non vedo l'ora di provare Marta e vedere come evolve il training.</span>
+      <summary>VENERDÌ: Future Loading... 🔮 <span class="tag tag-info">READY</span></summary>
+      <p><strong>Attività:</strong> Feedback Video AI 📹 e inizio corso "Saper comunicare" per il <strong>Simulatore Marta</strong>.</p>
+      <span class="mood">> LOG: Chiudo la settimana col botto 🔥. Non vedo l'ora di mettere le mani su Marta e vedere come evolve il training dalla prossima settimana!</span>
     </details>
   </main>
 
   <footer>
-    <p>_End of week 1: System stable. Next sync: Monday_</p>
+    <p>_End of week 1: System stable. Next sync: Monday_ 🌍</p>
   </footer>
 </div>
 
