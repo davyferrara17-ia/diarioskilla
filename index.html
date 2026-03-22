@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Intern Log - Week 01</title>
+    <title>AI Intern Log - Week 02</title>
     <style>
         /* TEMA SKILLA: Blu, Azzurro, Bianco, Viola Scuro */
         :root {
@@ -15,7 +15,6 @@
             --text-muted: #a0aec0; 
         }
 
-        /* Sfondo animato (Respiro AI) */
         body {
             background: linear-gradient(-45deg, #050514, #0a0b1e, #130930, #09122b);
             background-size: 400% 400%;
@@ -29,11 +28,7 @@
             min-height: 100vh;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         .terminal {
             border: 2px solid var(--primary-blue);
@@ -53,7 +48,6 @@
             padding-bottom: 20px;
         }
 
-        /* Effetto Macchina da Scrivere */
         .typewriter h1 {
             color: var(--glow-cyan);
             font-size: 1.6rem;
@@ -74,11 +68,8 @@
 
         /* Timeline 12 Settimane */
         .timeline-container {
-            margin-top: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 229, 255, 0.2);
+            margin-top: 20px; background: rgba(255, 255, 255, 0.05);
+            padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 229, 255, 0.2);
         }
 
         .timeline-header {
@@ -90,72 +81,62 @@
         .slot { height: 12px; flex-grow: 1; background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
         .slot.active { background: var(--glow-cyan); box-shadow: 0 0 10px var(--glow-cyan); }
 
-        /* NUOVO: Achievements */
-        .achievements {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        /* Achievements */
+        .achievements { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
         .badge {
-            background: rgba(74, 0, 224, 0.3);
-            border: 1px solid var(--glow-cyan);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: var(--glow-cyan);
-            box-shadow: 0 0 8px rgba(0, 229, 255, 0.2);
-            transition: all 0.3s ease;
+            background: rgba(74, 0, 224, 0.3); border: 1px solid var(--glow-cyan);
+            padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
+            color: var(--glow-cyan); box-shadow: 0 0 8px rgba(0, 229, 255, 0.2); transition: all 0.3s ease;
         }
         .badge:hover { transform: scale(1.1); background: var(--glow-cyan); color: #000; cursor: pointer; }
 
-        /* NUOVO: Skill Bars */
+        /* Skill Bars */
         .skills-matrix {
-            margin-top: 20px;
-            background: rgba(13, 110, 253, 0.05);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid rgba(13, 110, 253, 0.2);
+            margin-top: 20px; background: rgba(13, 110, 253, 0.05); padding: 15px;
+            border-radius: 8px; border: 1px solid rgba(13, 110, 253, 0.2);
         }
         .skill-row { margin-bottom: 8px; }
         .skill-name { font-size: 0.8rem; color: var(--text-white); margin-bottom: 4px; display: flex; justify-content: space-between;}
         .skill-bar-bg { background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; }
         .skill-bar-fill { height: 100%; background: var(--glow-cyan); border-radius: 4px; box-shadow: 0 0 10px var(--glow-cyan); }
         
-        /* Animazione caricamento barre */
-        .fill-30 { width: 0; animation: fill30 1.5s ease forwards 0.5s; }
+        .fill-40 { width: 0; animation: fill40 1.5s ease forwards 0.5s; }
+        .fill-55 { width: 0; animation: fill55 1.5s ease forwards 0.5s; }
         .fill-60 { width: 0; animation: fill60 1.5s ease forwards 0.5s; }
-        .fill-90 { width: 0; animation: fill90 1.5s ease forwards 0.5s; }
-        @keyframes fill30 { to { width: 30%; } }
+        .fill-95 { width: 0; animation: fill95 1.5s ease forwards 0.5s; }
+        @keyframes fill40 { to { width: 40%; } }
+        @keyframes fill55 { to { width: 55%; } }
         @keyframes fill60 { to { width: 60%; } }
-        @keyframes fill90 { to { width: 90%; } }
+        @keyframes fill95 { to { width: 95%; } }
 
-        /* Stile dei giorni con Hover 3D */
-        details {
-            margin-bottom: 15px; padding: 15px;
-            background: rgba(74, 0, 224, 0.1); 
-            border: 1px solid rgba(13, 110, 253, 0.3);
-            border-radius: 8px;
+        /* Giorni */
+        .day-block {
+            margin-bottom: 15px; padding: 15px; background: rgba(74, 0, 224, 0.1); 
+            border: 1px solid rgba(13, 110, 253, 0.3); border-radius: 8px;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-
-        details:hover {
-            background: rgba(13, 110, 253, 0.15);
-            border-color: var(--glow-cyan);
-            transform: translateX(8px); /* Effetto scatto in avanti */
-            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.5);
+        .day-block:hover {
+            background: rgba(13, 110, 253, 0.15); border-color: var(--glow-cyan);
+            transform: translateX(8px); box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.5);
         }
 
-        summary { font-weight: bold; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem; }
+        .day-title { font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem; margin-bottom: 10px; }
         
         .tag { font-size: 0.7rem; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
         .tag-success { background: var(--glow-cyan); color: #000; }
         .tag-info { border: 1px solid var(--glow-cyan); color: var(--glow-cyan); }
         .tag-warn { background: var(--dark-purple); color: var(--text-white); }
+        .tag-creative { background: #ff00ff; color: #fff; }
 
-        p { color: var(--text-muted); font-size: 0.95rem; margin: 15px 0 5px 0; line-height: 1.6; }
+        p { color: var(--text-muted); font-size: 0.95rem; margin: 10px 0 5px 0; line-height: 1.6; }
         .mood { color: var(--glow-cyan); font-style: italic; font-size: 0.9rem; border-top: 1px dashed rgba(0, 229, 255, 0.3); padding-top: 12px; margin-top: 12px; display: block; }
+
+        /* Archivio */
+        .archive {
+            margin-top: 40px; border: 1px dashed var(--dark-purple); background: rgba(0,0,0,0.3);
+        }
+        .archive summary { color: var(--text-muted); font-size: 0.9rem; padding: 10px; outline: none; cursor: pointer;}
+        .archive .day-block { border-color: rgba(13, 110, 253, 0.1); opacity: 0.8; }
 
         footer { margin-top: 40px; font-size: 0.8rem; text-align: center; color: var(--primary-blue); letter-spacing: 1px; }
         strong { color: var(--text-white); font-weight: 600; }
@@ -166,10 +147,10 @@
 <div class="terminal">
   <header>
     <div class="typewriter">
-        <h1>> SKILLA_AI_LOG_W01</h1>
+        <h1>> SKILLA_AI_LOG_W02</h1>
     </div>
     <div class="user-info">
-      🧑‍💻 User: Davide | 🏢 Team: AI Skilla | ✨ Status: Ready for Training
+      🧑‍💻 User: Davide | 🏢 Team: AI Skilla | ✨ Status: Connecting the dots...
     </div>
     
     <div class="timeline-container">
@@ -180,7 +161,8 @@
         </div>
         <div class="timeline-slots">
             <div class="slot active" title="Settimana 1 completata!"></div>
-            <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+            <div class="slot active" title="Settimana 2 completata!"></div>
+            <div class="slot"></div><div class="slot"></div>
             <div class="slot"></div><div class="slot"></div><div class="slot"></div>
             <div class="slot"></div><div class="slot"></div><div class="slot"></div>
             <div class="slot"></div><div class="slot"></div>
@@ -188,61 +170,92 @@
     </div>
 
     <div class="achievements">
-        <div class="badge" title="Hai completato la compliance!">🛡️ Cyber-Survivor</div>
-        <div class="badge" title="Hai applicato la Matrice di Eisenhower!">🧠 Prioritizer Pro</div>
-        <div class="badge" title="Hai sbloccato le logiche di Ari!">🗣️ AI Whisperer</div>
+        <div class="badge" title="Hai studiato i file finiti per capire quelli nuovi!">🔍 Reverse Engineer</div>
+        <div class="badge" title="Hai dato feedback costruttivi sulla grafica!">🎨 UX/UI Critic</div>
+        <div class="badge" title="Hai scoperto nuovi tool nell'Agentic AI!">🤖 Manus Explorer</div>
+        <div class="badge" style="opacity: 0.6;">🛡️ Cyber-Survivor (W1)</div>
+        <div class="badge" style="opacity: 0.6;">🧠 Prioritizer Pro (W1)</div>
     </div>
 
     <div class="skills-matrix">
         <div class="skill-row">
-            <div class="skill-name"><span>Logica Simulatori AI</span> <span>30%</span></div>
-            <div class="skill-bar-bg"><div class="skill-bar-fill fill-30"></div></div>
+            <div class="skill-name"><span>Logica Simulatori AI</span> <span>55%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill fill-55"></div></div>
         </div>
         <div class="skill-row">
-            <div class="skill-name"><span>Problem Solving & Priorità</span> <span>60%</span></div>
-            <div class="skill-bar-bg"><div class="skill-bar-fill fill-60"></div></div>
+            <div class="skill-name"><span>Occhio per la UX/UI</span> <span>40%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill fill-40"></div></div>
         </div>
         <div class="skill-row">
-            <div class="skill-name"><span>Pazienza Zen (Corsi Sicurezza)</span> <span>90%</span></div>
-            <div class="skill-bar-bg"><div class="skill-bar-fill fill-90"></div></div>
+            <div class="skill-name"><span>Pazienza Zen (Corsi obbligatori)</span> <span>95%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill fill-95"></div></div>
         </div>
     </div>
   </header>
 
   <main>
-    <details open>
-      <summary>LUNEDÌ: System Booting 🚀 <span class="tag tag-success">EMOTIONAL</span></summary>
-      <p><strong>Attività:</strong> Onboarding, setup dispositivi e mail aziendale. Prima partecipazione alle call sui <strong>Simulatori AI</strong> 🤖.</p>
-      <span class="mood">> LOG: Primo giorno intenso! Emozione alle stelle per l'inizio di questa avventura. Molte info da elaborare, ma il feeling è ottimo 🤩.</span>
+    <h3 style="color: var(--glow-cyan); margin-bottom: 15px; font-size: 1.1rem;">📍 CURRENT LOG: WEEK 02</h3>
+    
+    <div class="day-block">
+      <div class="day-title">LUNEDÌ: Foundations & Aesthetics 🎨 <span class="tag tag-creative">CREATIVE</span></div>
+      <p><strong>Attività:</strong> Corso "Saper comunicare" per il simulatore, call aggiornamenti e call dedicata a UX/UI.</p>
+      <span class="mood">> LOG: Molto stimolante! Anche se non avevo aggiornamenti miei da portare, mi è piaciuto tantissimo poter dare la mia opinione sulla parte visiva e grafica.</span>
+    </div>
+
+    <div class="day-block">
+      <div class="day-title">MARTEDÌ: Folder Labyrinth 📁 <span class="tag tag-warn">CHALLENGE</span></div>
+      <p><strong>Attività:</strong> Primo vero "hands-on" sul simulatore e call allineamento Team AI.</p>
+      <span class="mood">> LOG: Impatto iniziale bello tosto, molta confusione tra le varie cartelle. Ma non ho mollato e poco alla volta sto collegando i puntini.</span>
+    </div>
+
+    <div class="day-block">
+      <div class="day-title">MERCOLEDÌ: Reverse Engineering 🔍 <span class="tag tag-info">LEARNING</span></div>
+      <p><strong>Attività:</strong> Studio e comparazione dei simulatori.</p>
+      <span class="mood">> LOG: Trovata la chiave! Ho iniziato a capirci di più comparando il mio simulatore con quelli già completi per studiarne la logica.</span>
+    </div>
+
+    <div class="day-block">
+      <div class="day-title">GIOVEDÌ: Agentic Ideas 💡 <span class="tag tag-success">BREAKTHROUGH</span></div>
+      <p><strong>Attività:</strong> Primi appunti sul simulatore "Saper comunicare". Corso Agentic AI.</p>
+      <span class="mood">> LOG: Giornata super produttiva. Ho un sacco di idee per il simulatore da discutere lunedì. Il corso AI è stato utile, conoscevo già molto ma ho scoperto "Manus": sono curiosissimo di provarlo!</span>
+    </div>
+
+    <div class="day-block">
+      <div class="day-title">VENERDÌ: Energy Saving Mode 🔋 <span class="tag tag-info">FOCUS</span></div>
+      <p><strong>Attività:</strong> Scrittura simulatore, feedback finale simulatore di Martina e... corso molestie sul lavoro.</p>
+      <span class="mood">> LOG: Un po' stanco fisicamente, ma soddisfatto. Il corso obbligatorio è interessante ma pesante da seguire, faccio appello all'ultima pazienza rimasta per il weekend!</span>
+    </div>
+
+    <details class="archive">
+        <summary>📂 ARCHIVIO LOG: SETTIMANA 01</summary>
+        <div style="padding: 15px;">
+            <div class="day-block">
+                <div class="day-title">LUNEDÌ: System Booting 🚀 <span class="tag tag-success">EMOTIONAL</span></div>
+                <p><strong>Attività:</strong> Onboarding e prima partecipazione alle call sui Simulatori AI.</p>
+            </div>
+            <div class="day-block">
+                <div class="day-title">MARTEDÌ: Logic & Priority 🧠 <span class="tag tag-info">LEARNING</span></div>
+                <p><strong>Attività:</strong> Webinar Problem Solving (Eisenhower) e corsi sicurezza.</p>
+            </div>
+            <div class="day-block">
+                <div class="day-title">MERCOLEDÌ: Firewall Phase 🛡️ <span class="tag tag-warn">BORING</span></div>
+                <p><strong>Attività:</strong> Corso Cyberserenity.</p>
+            </div>
+            <div class="day-block">
+                <div class="day-title">GIOVEDÌ: Neural Clarity 💡 <span class="tag tag-success">BREAKTHROUGH</span></div>
+                <p><strong>Attività:</strong> Riunione Simulatore Ari, feedback tecnici e GDPR.</p>
+            </div>
+            <div class="day-block">
+                <div class="day-title">VENERDÌ: Future Loading... 🔮 <span class="tag tag-info">READY</span></div>
+                <p><strong>Attività:</strong> Feedback Video AI e inizio corso per Simulatore Marta.</p>
+            </div>
+        </div>
     </details>
 
-    <details>
-      <summary>MARTEDÌ: Logic & Priority 🧠 <span class="tag tag-info">LEARNING</span></summary>
-      <p><strong>Attività:</strong> Webinar Problem Solving (Matrice Eisenhower 📊) e corsi sicurezza obbligatori.</p>
-      <span class="mood">> LOG: Ho imparato che prioritizzare è fondamentale. Anche se i corsi sicurezza sono densi, la testa è già ai progetti AI 💭.</span>
-    </details>
-
-    <details>
-      <summary>MERCOLEDÌ: Firewall Phase 🛡️ <span class="tag tag-warn">BORING</span></summary>
-      <p><strong>Attività:</strong> Corso Cyberserenity 🔒.</p>
-      <span class="mood">> LOG: Livelli di noia rilevati sopra la soglia critica 😴. Protocollo di pazienza attivato per completare la compliance.</span>
-    </details>
-
-    <details>
-      <summary>GIOVEDÌ: Neural Clarity 💡 <span class="tag tag-success">BREAKTHROUGH</span></summary>
-      <p><strong>Attività:</strong> Riunione Simulatore Ari 🗣️, feedback tecnici e corso GDPR.</p>
-      <span class="mood">> LOG: Call illuminante! La call con Ari è stata il "click" che serviva per capire la logica dei simulatori 💪.</span>
-    </details>
-
-    <details>
-      <summary>VENERDÌ: Future Loading... 🔮 <span class="tag tag-info">READY</span></summary>
-      <p><strong>Attività:</strong> Feedback Video AI 📹 e inizio corso "Saper comunicare" per il <strong>Simulatore Marta</strong>.</p>
-      <span class="mood">> LOG: Chiudo la settimana col botto 🔥. Non vedo l'ora di provare il simulatore di saper comunicare dalla prossima settimana!</span>
-    </details>
   </main>
 
   <footer>
-    <p>_End of week 1: Database Saved. See you on Monday_ 🌍</p>
+    <p>_End of week 2: Folders sorted, logic loaded. Ready for the weekend._ 🌍</p>
   </footer>
 </div>
 
