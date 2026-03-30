@@ -122,15 +122,17 @@
         .tag-info { border: 1px solid var(--glow-cyan); color: var(--glow-cyan); }
         .tag-warn { background: var(--dark-purple); color: var(--text-white); }
         .tag-alert { background: #ff3e3e; color: #fff; }
+        .tag-creative { background: #ff00ff; color: #fff; }
 
         p { color: var(--text-muted); font-size: 0.95rem; margin: 10px 0 5px 0; line-height: 1.6; }
         .mood { color: var(--glow-cyan); font-style: italic; font-size: 0.9rem; border-top: 1px dashed rgba(0, 229, 255, 0.3); padding-top: 12px; margin-top: 12px; display: block; }
 
-        .archive { margin-top: 40px; border: 1px dashed var(--dark-purple); background: rgba(0,0,0,0.3); }
-        .archive summary { color: var(--text-muted); font-size: 0.9rem; padding: 10px; outline: none; cursor: pointer;}
-        .archive .module-block { border-color: rgba(13, 110, 253, 0.1); opacity: 0.7; padding: 10px; }
-        .archive .module-title { font-size: 0.95rem; margin-bottom: 5px; }
-        .archive p { font-size: 0.85rem; margin: 5px 0; }
+        .archive { margin-top: 40px; border: 1px dashed var(--dark-purple); background: rgba(0,0,0,0.3); border-radius: 8px; }
+        .archive summary { color: var(--glow-cyan); font-size: 1rem; font-weight: bold; padding: 15px; outline: none; cursor: pointer; }
+        .archive .archive-content { padding: 0 15px 15px 15px; }
+        .archive h4 { color: var(--text-white); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; margin-top: 20px; }
+        .archive .module-block { opacity: 0.8; }
+        .archive .module-block:hover { opacity: 1; }
 
         footer { margin-top: 40px; font-size: 0.8rem; text-align: center; color: var(--primary-blue); letter-spacing: 1px; }
         strong { color: var(--text-white); font-weight: 600; }
@@ -181,7 +183,7 @@
             <div class="skill-bar-bg"><div class="skill-bar-fill fill-45"></div></div>
         </div>
         <div class="skill-row">
-            <div class="skill-name"><span>Pazienza Zen (Corsi HR)</span> <span>100% MAX</span></div>
+            <div class="skill-name"><span>Pazienza Zen (Compliance)</span> <span>100% MAX</span></div>
             <div class="skill-bar-bg"><div class="skill-bar-fill fill-100"></div></div>
         </div>
     </div>
@@ -216,22 +218,70 @@
 
     <details class="archive">
         <summary>📂 ARCHIVIO LOG: SETTIMANE 01 - 02</summary>
-        <div style="padding: 15px;">
-            <h4 style="color: var(--text-muted); margin: 0 0 10px 0;">WEEK 02</h4>
-            <div class="module-block">
-                <div class="module-title">LUNEDÌ - MERCOLEDÌ: Foundations & Reverse Engineering 🔍</div>
-                <p>Studio UX/UI, impatto con la struttura delle cartelle e comparazione simulatori finiti per capirne la logica.</p>
-            </div>
-            <div class="module-block">
-                <div class="module-title">GIOVEDÌ - VENERDÌ: Agentic Ideas & Focus 🔋</div>
-                <p>Primi appunti sul simulatore, scoperto Manus, feedback su simulatore Martina.</p>
-            </div>
+        <div class="archive-content">
             
-            <h4 style="color: var(--text-muted); margin: 20px 0 10px 0;">WEEK 01</h4>
+            <h4>WEEK 02</h4>
             <div class="module-block">
-                <div class="module-title">WEEK 01 SUMMARY 🚀</div>
-                <p>Onboarding iniziale, corsi sicurezza, scoperta Matrice Eisenhower e primi passi concettuali sui Simulatori AI (Ari e Marta).</p>
+              <div class="module-title">LUNEDÌ: Foundations & Aesthetics 🎨 <span class="tag tag-creative">CREATIVE</span></div>
+              <p><strong>Attività:</strong> Corso "Saper comunicare" per il simulatore, call aggiornamenti e call dedicata a UX/UI.</p>
+              <span class="mood">> LOG: Molto stimolante! Anche se non avevo aggiornamenti miei da portare, mi è piaciuto tantissimo poter dare la mia opinione sulla parte visiva e grafica.</span>
             </div>
+
+            <div class="module-block">
+              <div class="module-title">MARTEDÌ: Folder Labyrinth 📁 <span class="tag tag-warn">CHALLENGE</span></div>
+              <p><strong>Attività:</strong> Primo vero "hands-on" sul simulatore e call allineamento Team AI.</p>
+              <span class="mood">> LOG: Impatto iniziale bello tosto, molta confusione tra le varie cartelle. Ma non ho mollato e poco alla volta sto collegando i puntini.</span>
+            </div>
+
+            <div class="module-block">
+              <div class="module-title">MERCOLEDÌ: Reverse Engineering 🔍 <span class="tag tag-info">LEARNING</span></div>
+              <p><strong>Attività:</strong> Studio e comparazione dei simulatori.</p>
+              <span class="mood">> LOG: Trovata la chiave! Ho iniziato a capirci di più comparando il mio simulatore con quelli già completi per studiarne la logica.</span>
+            </div>
+
+            <div class="module-block">
+              <div class="module-title">GIOVEDÌ: Agentic Ideas 💡 <span class="tag tag-success">BREAKTHROUGH</span></div>
+              <p><strong>Attività:</strong> Primi appunti sul simulatore "Saper comunicare". Corso Agentic AI.</p>
+              <span class="mood">> LOG: Giornata super produttiva. Ho un sacco di idee per il simulatore da discutere lunedì. Il corso AI è stato utile, ho scoperto "Manus": curiosissimo di provarlo!</span>
+            </div>
+
+            <div class="module-block">
+              <div class="module-title">VENERDÌ: Energy Saving Mode 🔋 <span class="tag tag-info">FOCUS</span></div>
+              <p><strong>Attività:</strong> Scrittura simulatore, feedback finale simulatore di Martina e corso compliance.</p>
+              <span class="mood">> LOG: Un po' stanco fisicamente, ma soddisfatto. Il corso obbligatorio è interessante ma pesante da seguire.</span>
+            </div>
+
+            <h4>WEEK 01</h4>
+            <div class="module-block">
+              <div class="module-title">LUNEDÌ: System Booting 🚀 <span class="tag tag-success">EMOTIONAL</span></div>
+              <p><strong>Attività:</strong> Onboarding, setup dispositivi e mail aziendale. Prima partecipazione alle call sui Simulatori AI.</p>
+              <span class="mood">> LOG: Primo giorno intenso! Emozione alle stelle per l'inizio di questa avventura. Molte info da elaborare, ma il feeling è ottimo.</span>
+            </div>
+
+            <div class="module-block">
+              <div class="module-title">MARTEDÌ: Logic & Priority 🧠 <span class="tag tag-info">LEARNING</span></div>
+              <p><strong>Attività:</strong> Webinar Problem Solving (Matrice Eisenhower) e corsi sicurezza obbligatori.</p>
+              <span class="mood">> LOG: Ho imparato che prioritizzare è fondamentale. Anche se i corsi sicurezza sono densi, la testa è già ai progetti AI.</span>
+            </div>
+
+            <div class="module-block">
+              <div class="module-title">MERCOLEDÌ: Firewall Phase 🛡️ <span class="tag tag-warn">BORING</span></div>
+              <p><strong>Attività:</strong> Corso Cyberserenity.</p>
+              <span class="mood">> LOG: Livelli di noia rilevati sopra la soglia critica. Protocollo di pazienza attivato per completare la compliance.</span>
+            </div>
+
+            <div class="module-block">
+              <div class="module-title">GIOVEDÌ: Neural Clarity 💡 <span class="tag tag-success">BREAKTHROUGH</span></div>
+              <p><strong>Attività:</strong> Riunione Simulatore Ari, feedback tecnici e corso GDPR.</p>
+              <span class="mood">> LOG: Call illuminante! La call con Ari è stata il "click" che serviva per capire la logica dei simulatori.</span>
+            </div>
+
+            <div class="module-block">
+              <div class="module-title">VENERDÌ: Future Loading... 🔮 <span class="tag tag-info">READY</span></div>
+              <p><strong>Attività:</strong> Feedback Video AI e inizio corso "Saper comunicare" per il Simulatore Marta.</p>
+              <span class="mood">> LOG: Chiudo la settimana col botto. Non vedo l'ora di provare il simulatore di saper comunicare dalla prossima settimana!</span>
+            </div>
+
         </div>
     </details>
 
