@@ -28,7 +28,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle, #130930 0%, #050514 100%);
             display: flex; justify-content: center; align-items: center;
-            z-index: 1000; transition: all 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+            z-index: 1000; transition: opacity 0.5s ease 0.8s, visibility 0s linear 1.3s;
         }
 
         .phone-mockup {
@@ -37,7 +37,10 @@
             position: relative; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             background: #000; box-shadow: 0 0 50px rgba(0, 229, 255, 0.3);
-            cursor: pointer; transition: transform 0.3s ease;
+            cursor: pointer; 
+            /* Transizione base per l'hover */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-origin: center center;
         }
 
         .phone-mockup:hover { transform: scale(1.05); }
@@ -45,7 +48,7 @@
         .phone-screen-small {
             width: 90%; height: 85%; background: var(--bg-color);
             border-radius: 10px; display: flex; justify-content: center;
-            align-items: center; border: 1px solid #222;
+            align-items: center; border: 1px solid #222; overflow: hidden;
         }
 
         .start-btn {
@@ -53,17 +56,28 @@
             padding: 10px 15px; border-radius: 5px; font-weight: bold;
             font-size: 0.8rem; cursor: pointer; text-transform: uppercase;
             box-shadow: 0 0 15px var(--glow-cyan);
+            pointer-events: none; /* Lascia il click al contenitore */
         }
 
-        /* Classe attivata via JS per l'animazione di entrata */
+        /* Classe attivata via JS per l'animazione zoom estremo */
         .zoom-effect {
-            transform: scale(15) !important;
-            opacity: 0; pointer-events: none;
+            /* Scala massiccia per superare i bordi dello schermo */
+            transform: scale(40) !important;
+            /* La scomparsa inizia solo quando il telefono è già enorme */
+            opacity: 0; 
+            transition: transform 1.2s cubic-bezier(0.75, 0, 0.25, 1), opacity 0.4s ease 0.6s !important;
+            pointer-events: none;
+        }
+
+        .hide-overlay {
+            opacity: 0;
+            visibility: hidden;
         }
 
         /* --- DIARIO DI BORDO --- */
         .main-wrapper {
-            opacity: 0; transition: opacity 1s ease 0.5s;
+            opacity: 0; 
+            transition: opacity 1s ease 1s; /* Appare quando lo zoom è finito */
             display: flex; justify-content: center; padding: 20px;
         }
 
@@ -72,7 +86,7 @@
         .terminal {
             border: 2px solid var(--primary-blue);
             padding: 25px; width: 100%;
-            max-width: 580px; /* Più verticale per simulare smartphone */
+            max-width: 580px;
             box-shadow: 0 0 30px rgba(13, 110, 253, 0.4);
             background: rgba(5, 5, 20, 0.9);
             border-radius: 15px;
@@ -111,7 +125,7 @@
         .skill-row { margin-bottom: 6px; }
         .skill-name { font-size: 0.75rem; display: flex; justify-content: space-between; margin-bottom: 3px; }
         .skill-bar-bg { background: rgba(255, 255, 255, 0.1); height: 6px; border-radius: 3px; overflow: hidden; }
-        .skill-bar-fill { height: 100%; background: var(--glow-cyan); box-shadow: 0 0 8px var(--glow-cyan); transition: width 1s ease-in-out; }
+        .skill-bar-fill { height: 100%; background: var(--glow-cyan); box-shadow: 0 0 8px var(--glow-cyan); }
 
         /* Contenuti Log */
         .module-block {
@@ -123,19 +137,25 @@
         .tag-success { background: var(--glow-cyan); color: #000; }
         .tag-info { border: 1px solid var(--glow-cyan); color: var(--glow-cyan); }
         .tag-warn { background: var(--dark-purple); color: var(--text-white); }
+        .tag-alert { background: #ff3e3e; color: #fff; }
+        .tag-holiday { background: #ffcc00; color: #000; }
         
         p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin: 8px 0; }
         .mood { color: var(--glow-cyan); font-style: italic; font-size: 0.8rem; border-top: 1px dashed rgba(0, 229, 255, 0.2); padding-top: 10px; margin-top: 10px; display: block; }
 
         .archive { margin-top: 30px; border: 1px dashed var(--dark-purple); border-radius: 8px; }
-        .archive summary { color: var(--text-muted); font-size: 0.85rem; padding: 10px; cursor: pointer; }
+        .archive summary { color: var(--glow-cyan); font-size: 0.9rem; font-weight: bold; padding: 15px; cursor: pointer; outline: none; }
+        .archive .archive-content { padding: 0 15px 15px 15px; }
+        .archive h4 { color: var(--text-white); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; margin-top: 20px; font-size: 0.9rem; }
+        .archive .module-block { opacity: 0.8; padding: 12px; }
 
         footer { text-align: center; font-size: 0.7rem; color: var(--primary-blue); margin-top: 30px; }
+        strong { color: var(--text-white); }
     </style>
 </head>
-<body onclick="startEntry()">
+<body>
 
-    <div id="intro-overlay">
+    <div id="intro-overlay" onclick="startEntry()">
         <div class="phone-mockup" id="phone">
             <div class="phone-screen-small">
                 <button class="start-btn">Access Log</button>
@@ -159,8 +179,8 @@
 
                 <div class="achievements">
                     <div class="badge">✅ Luca.exe Loaded</div>
-                    <div class="badge">🏗️ Character Adaptation</div>
-                    <div class="badge">⚖️ Compliance 231 Done</div>
+                    <div class="badge">🏗️ Character Architect</div>
+                    <div class="badge">⚖️ Compliance Marathoner</div>
                 </div>
 
                 <div class="skills-matrix">
@@ -180,28 +200,86 @@
                 
                 <div class="module-block">
                     <div class="module-title">MODULE 01: Character Success <span class="tag tag-success">MILESTONE</span></div>
-                    <p>Test del prompt di <strong>Luca</strong>: funziona! La riprogettazione logica ha pagato. Ora il modello risponde correttamente alle intenzioni formative.</p>
-                    <span class="mood">> LOG: Vedere Luca girare bene è una grande soddisfazione. È il "punto di prova" che mi serviva.</span>
+                    <p><strong>Task:</strong> Test del prompt di Luca per il simulatore "Saper comunicare".</p>
+                    <span class="mood">> LOG: Molto soddisfatto! Il lavoro di riprogettazione ha pagato: Luca funziona bene. La direzione è quella giusta.</span>
                 </div>
 
                 <div class="module-block">
-                    <div class="module-title">MODULE 02: Scaling & Scaling <span class="tag tag-info">NEXT</span></div>
-                    <p>Inizio adattamento per Alice e Marta. Il template di Luca fa da base, ma ogni personaggio ha le sue sfumature.</p>
-                    <span class="mood">> LOG: Un po' di ansia da velocità; vorrei correre di più, ma la precisione in questa fase è tutto.</span>
+                    <div class="module-title">MODULE 02: Scaling & Adaptation <span class="tag tag-info">NEXT STEP</span></div>
+                    <p><strong>Task:</strong> Inizio lavori per adattare Alice e Marta seguendo il nuovo schema logico.</p>
+                    <span class="mood">> LOG: Un po' di nervosismo. Avrei voluto procedere più velocemente, ma la complessità richiede precisione.</span>
                 </div>
 
                 <div class="module-block">
-                    <div class="module-title">MODULE 03: 231 Compliance <span class="tag tag-warn">DONE</span></div>
-                    <p>Completati i due corsi obbligatori sul D.Lgs. 231/01.</p>
+                    <div class="module-title">MODULE 03: Compliance Update <span class="tag tag-warn">COMPLETED</span></div>
+                    <p><strong>Task:</strong> Completati 2 corsi obbligatori sul D.Lgs. 231/01.</p>
+                </div>
+
+                <div class="module-block">
+                    <div class="module-title">MODULE 04: Holiday Carryover <span class="tag tag-holiday">HOLIDAY</span></div>
+                    <p><strong>Task:</strong> Lunedì dell'Angelo festivo.</p>
                 </div>
 
                 <details class="archive">
-                    <summary>📂 ARCHIVIO (W1 - W4)</summary>
-                    <div style="padding: 10px; font-size: 0.75rem;">
-                        <p><strong>W4:</strong> Pivot scenario, test 2x, feedback Alba, ponte Pasquetta.</p>
-                        <p><strong>W3:</strong> Character Engineering, Reality Check test fallito (necessario pivot).</p>
-                        <p><strong>W2:</strong> UX/UI focus, Labirinto cartelle, Reverse Engineering simulatori.</p>
-                        <p><strong>W1:</strong> Onboarding, Matrice Eisenhower, corsi sicurezza.</p>
+                    <summary>📂 ARCHIVIO LOG: SETTIMANE 01 - 04</summary>
+                    <div class="archive-content">
+                        
+                        <h4>WEEK 04</h4>
+                        <div class="module-block">
+                            <div class="module-title">MODULE 01: QA & Architecture Pivot 🏗️</div>
+                            <p>Eseguiti 2 round di test. Decisione presa: riprendere il simulatore "Saper comunicare" ma ripensando da zero lo scenario narrativo e logico.</p>
+                        </div>
+                        <div class="module-block">
+                            <div class="module-title">MODULE 02: Peer Review & Collaboration 🗣️</div>
+                            <p>Call di allineamento con Alba per fornirle feedback strutturati sulle sue proposte di scenario.</p>
+                        </div>
+                        <div class="module-block">
+                            <div class="module-title">MODULE 03: System Standby 🔋</div>
+                            <p>Venerdì feriale preso come ponte fino a Pasquetta.</p>
+                        </div>
+
+                        <h4>WEEK 03</h4>
+                        <div class="module-block">
+                          <div class="module-title">MODULE 01: Character Engineering ⚙️</div>
+                          <p>Lavorato sui prompt di 3 personaggi per "Saper comunicare" (Alice, Luca, Marta). Divertente ma stressante, continui micro-problemi.</p>
+                        </div>
+                        <div class="module-block">
+                          <div class="module-title">MODULE 02: Beta Testing & Reality Check 📉</div>
+                          <p>Call di test per il simulatore. I risultati non sono quelli attesi, l'intero scenario non è efficace. Necessario rimetterci mano.</p>
+                        </div>
+                        <div class="module-block">
+                          <div class="module-title">MODULE 03: Knowledge Base Expansion 🧠</div>
+                          <p>Formazione Prompt Design, Video AI (Flow) e tool di orchestrazione.</p>
+                        </div>
+
+                        <h4>WEEK 02</h4>
+                        <div class="module-block">
+                          <div class="module-title">LUNEDÌ: Foundations & Aesthetics 🎨</div>
+                          <p>Corso "Saper comunicare", call aggiornamenti e focus su UX/UI.</p>
+                        </div>
+                        <div class="module-block">
+                          <div class="module-title">MARTEDÌ: Folder Labyrinth 📁</div>
+                          <p>Primo vero "hands-on" sul simulatore e call allineamento. Confusione iniziale tra le cartelle.</p>
+                        </div>
+                        <div class="module-block">
+                          <div class="module-title">MERCOLEDÌ: Reverse Engineering 🔍</div>
+                          <p>Studio e comparazione dei simulatori già completi per studiarne la logica.</p>
+                        </div>
+                        <div class="module-block">
+                          <div class="module-title">GIOVEDÌ - VENERDÌ: Agentic Ideas & Focus 🔋</div>
+                          <p>Primi appunti simulatore, scoperto tool Manus, feedback simulatore Martina e corso compliance.</p>
+                        </div>
+
+                        <h4>WEEK 01</h4>
+                        <div class="module-block">
+                          <div class="module-title">LUNEDÌ - MARTEDÌ: System Booting 🚀</div>
+                          <p>Onboarding, setup, Matrice Eisenhower e corsi sicurezza.</p>
+                        </div>
+                        <div class="module-block">
+                          <div class="module-title">MERCOLEDÌ - VENERDÌ: Neural Clarity 💡</div>
+                          <p>Riunione Simulatore Ari, feedback tecnici, corso GDPR e inizio corso Simulatore Marta.</p>
+                        </div>
+
                     </div>
                 </details>
             </main>
@@ -218,12 +296,12 @@
 
             // Avvia animazione zoom
             phone.classList.add('zoom-effect');
+            intro.classList.add('hide-overlay');
             
-            // Nasconde overlay e mostra contenuto
+            // Mostra contenuto
             setTimeout(() => {
-                intro.style.display = 'none';
                 content.classList.add('visible');
-            }, 800);
+            }, 1000);
         }
     </script>
 </body>
