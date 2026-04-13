@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Intern Log - Week 04</title>
+    <title>AI Intern Log - Davide</title>
     <style>
-        /* TEMA SKILLA: Blu, Azzurro, Bianco, Viola Scuro */
         :root {
             --bg-color: #050514; 
             --primary-blue: #0d6efd; 
@@ -15,298 +14,217 @@
             --text-muted: #a0aec0; 
         }
 
-        body {
-            background: linear-gradient(-45deg, #050514, #0a0b1e, #130930, #09122b);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+        /* RESET & BASE */
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: var(--bg-color);
             color: var(--text-white);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            margin: 0;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        /* --- ANIMAZIONE DI INGRESSO (INTRO) --- */
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, #130930 0%, #050514 100%);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; transition: all 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+
+        .phone-mockup {
+            width: 180px; height: 350px;
+            border: 6px solid #333; border-radius: 30px;
+            position: relative; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            background: #000; box-shadow: 0 0 50px rgba(0, 229, 255, 0.3);
+            cursor: pointer; transition: transform 0.3s ease;
+        }
+
+        .phone-mockup:hover { transform: scale(1.05); }
+
+        .phone-screen-small {
+            width: 90%; height: 85%; background: var(--bg-color);
+            border-radius: 10px; display: flex; justify-content: center;
+            align-items: center; border: 1px solid #222;
+        }
+
+        .start-btn {
+            background: var(--glow-cyan); color: #000; border: none;
+            padding: 10px 15px; border-radius: 5px; font-weight: bold;
+            font-size: 0.8rem; cursor: pointer; text-transform: uppercase;
+            box-shadow: 0 0 15px var(--glow-cyan);
+        }
+
+        /* Classe attivata via JS per l'animazione di entrata */
+        .zoom-effect {
+            transform: scale(15) !important;
+            opacity: 0; pointer-events: none;
+        }
+
+        /* --- DIARIO DI BORDO --- */
+        .main-wrapper {
+            opacity: 0; transition: opacity 1s ease 0.5s;
+            display: flex; justify-content: center; padding: 20px;
+        }
+
+        .visible { opacity: 1 !important; }
 
         .terminal {
             border: 2px solid var(--primary-blue);
-            padding: 30px;
-            width: 100%;
-            max-width: 750px;
-            box-shadow: 0 0 30px rgba(13, 110, 253, 0.4), inset 0 0 20px rgba(74, 0, 224, 0.3);
-            background: rgba(5, 5, 20, 0.85);
-            border-radius: 12px;
-            margin-top: 10px;
+            padding: 25px; width: 100%;
+            max-width: 580px; /* Più verticale per simulare smartphone */
+            box-shadow: 0 0 30px rgba(13, 110, 253, 0.4);
+            background: rgba(5, 5, 20, 0.9);
+            border-radius: 15px;
             backdrop-filter: blur(10px);
         }
 
-        header {
-            border-bottom: 2px dashed var(--dark-purple);
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-        }
-
+        header { border-bottom: 2px dashed var(--dark-purple); margin-bottom: 25px; padding-bottom: 20px; }
+        
         .typewriter h1 {
-            color: var(--glow-cyan);
-            font-size: 1.6rem;
-            margin: 0;
-            letter-spacing: 2px;
-            font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid var(--text-white);
-            animation: typing 2s steps(30, end), blink-caret .75s step-end infinite;
-            text-shadow: 0 0 10px var(--glow-cyan);
+            color: var(--glow-cyan); font-size: 1.4rem; margin: 0;
+            font-family: 'Courier New', monospace; overflow: hidden; white-space: nowrap;
+            border-right: 3px solid var(--text-white); animation: typing 2s steps(30, end), blink-caret .75s step-end infinite;
         }
 
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--text-white) } }
 
-        .user-info { font-size: 0.95rem; color: var(--text-white); margin-top: 12px; font-weight: 500; }
+        .user-info { font-size: 0.85rem; margin-top: 10px; color: var(--text-muted); }
 
         .timeline-container {
-            margin-top: 20px; background: rgba(255, 255, 255, 0.05);
-            padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 229, 255, 0.2);
+            margin-top: 15px; background: rgba(255, 255, 255, 0.05);
+            padding: 12px; border-radius: 8px; border: 1px solid rgba(0, 229, 255, 0.1);
         }
+        .timeline-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--glow-cyan); margin-bottom: 8px; }
+        .timeline-slots { display: flex; justify-content: space-between; gap: 4px; }
+        .slot { height: 10px; flex-grow: 1; background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+        .slot.active { background: var(--glow-cyan); box-shadow: 0 0 8px var(--glow-cyan); }
 
-        .timeline-header {
-            display: flex; justify-content: space-between; font-size: 0.85rem;
-            color: var(--glow-cyan); font-weight: bold; margin-bottom: 10px;
-        }
-
-        .timeline-slots { display: flex; justify-content: space-between; gap: 5px; }
-        .slot { height: 12px; flex-grow: 1; background: rgba(255, 255, 255, 0.1); border-radius: 3px; }
-        .slot.active { background: var(--glow-cyan); box-shadow: 0 0 10px var(--glow-cyan); }
-
-        .achievements { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .achievements { margin: 15px 0; display: flex; gap: 8px; flex-wrap: wrap; }
         .badge {
-            background: rgba(74, 0, 224, 0.3); border: 1px solid var(--glow-cyan);
-            padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
-            color: var(--glow-cyan); box-shadow: 0 0 8px rgba(0, 229, 255, 0.2); transition: all 0.3s ease;
+            background: rgba(74, 0, 224, 0.2); border: 1px solid var(--glow-cyan);
+            padding: 5px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: bold; color: var(--glow-cyan);
         }
-        .badge:hover { transform: scale(1.1); background: var(--glow-cyan); color: #000; cursor: pointer; }
-        .badge-old { opacity: 0.4; border-color: var(--text-muted); color: var(--text-muted); box-shadow: none; }
 
-        .skills-matrix {
-            margin-top: 20px; background: rgba(13, 110, 253, 0.05); padding: 15px;
-            border-radius: 8px; border: 1px solid rgba(13, 110, 253, 0.2);
-        }
-        .skill-row { margin-bottom: 8px; }
-        .skill-name { font-size: 0.8rem; color: var(--text-white); margin-bottom: 4px; display: flex; justify-content: space-between;}
-        .skill-bar-bg { background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; }
-        .skill-bar-fill { height: 100%; background: var(--glow-cyan); border-radius: 4px; box-shadow: 0 0 10px var(--glow-cyan); }
-        
-        .fill-55 { width: 0; animation: fill55 1.5s ease forwards 0.5s; }
-        .fill-75 { width: 0; animation: fill75 1.5s ease forwards 0.5s; }
-        .fill-100 { width: 0; animation: fill100 1.5s ease forwards 0.5s; }
-        @keyframes fill55 { to { width: 55%; } }
-        @keyframes fill75 { to { width: 75%; } }
-        @keyframes fill100 { to { width: 100%; } }
+        .skills-matrix { margin-top: 15px; padding: 12px; background: rgba(13, 110, 253, 0.05); border-radius: 8px; }
+        .skill-row { margin-bottom: 6px; }
+        .skill-name { font-size: 0.75rem; display: flex; justify-content: space-between; margin-bottom: 3px; }
+        .skill-bar-bg { background: rgba(255, 255, 255, 0.1); height: 6px; border-radius: 3px; overflow: hidden; }
+        .skill-bar-fill { height: 100%; background: var(--glow-cyan); box-shadow: 0 0 8px var(--glow-cyan); transition: width 1s ease-in-out; }
 
+        /* Contenuti Log */
         .module-block {
-            margin-bottom: 15px; padding: 15px; background: rgba(74, 0, 224, 0.1); 
-            border: 1px solid rgba(13, 110, 253, 0.3); border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-bottom: 15px; padding: 15px; background: rgba(74, 0, 224, 0.05); 
+            border: 1px solid rgba(13, 110, 253, 0.2); border-radius: 10px;
         }
-        .module-block:hover {
-            background: rgba(13, 110, 253, 0.15); border-color: var(--glow-cyan);
-            transform: translateX(8px); box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .module-title { font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem; margin-bottom: 10px; color: var(--text-white); }
-        
-        .tag { font-size: 0.7rem; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
+        .module-title { font-weight: bold; font-size: 0.95rem; color: var(--text-white); display: flex; justify-content: space-between; align-items: center; }
+        .tag { font-size: 0.6rem; padding: 3px 8px; border-radius: 10px; text-transform: uppercase; font-weight: bold; }
         .tag-success { background: var(--glow-cyan); color: #000; }
         .tag-info { border: 1px solid var(--glow-cyan); color: var(--glow-cyan); }
         .tag-warn { background: var(--dark-purple); color: var(--text-white); }
-        .tag-alert { background: #ff3e3e; color: #fff; }
-        .tag-creative { background: #ff00ff; color: #fff; }
-        .tag-holiday { background: #ffcc00; color: #000; }
+        
+        p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin: 8px 0; }
+        .mood { color: var(--glow-cyan); font-style: italic; font-size: 0.8rem; border-top: 1px dashed rgba(0, 229, 255, 0.2); padding-top: 10px; margin-top: 10px; display: block; }
 
-        p { color: var(--text-muted); font-size: 0.95rem; margin: 10px 0 5px 0; line-height: 1.6; }
-        .mood { color: var(--glow-cyan); font-style: italic; font-size: 0.9rem; border-top: 1px dashed rgba(0, 229, 255, 0.3); padding-top: 12px; margin-top: 12px; display: block; }
+        .archive { margin-top: 30px; border: 1px dashed var(--dark-purple); border-radius: 8px; }
+        .archive summary { color: var(--text-muted); font-size: 0.85rem; padding: 10px; cursor: pointer; }
 
-        .archive { margin-top: 40px; border: 1px dashed var(--dark-purple); background: rgba(0,0,0,0.3); border-radius: 8px; }
-        .archive summary { color: var(--glow-cyan); font-size: 1rem; font-weight: bold; padding: 15px; outline: none; cursor: pointer; }
-        .archive .archive-content { padding: 0 15px 15px 15px; }
-        .archive h4 { color: var(--text-white); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; margin-top: 20px; }
-        .archive .module-block { opacity: 0.8; }
-        .archive .module-block:hover { opacity: 1; }
-
-        footer { margin-top: 40px; font-size: 0.8rem; text-align: center; color: var(--primary-blue); letter-spacing: 1px; }
-        strong { color: var(--text-white); font-weight: 600; }
+        footer { text-align: center; font-size: 0.7rem; color: var(--primary-blue); margin-top: 30px; }
     </style>
 </head>
-<body>
+<body onclick="startEntry()">
 
-<div class="terminal">
-  <header>
-    <div class="typewriter">
-        <h1>> SKILLA_AI_LOG_W04</h1>
-    </div>
-    <div class="user-info">
-      🧑‍💻 User: Davide | 🏢 Team: AI Skilla | ✨ Status: System Recharge
-    </div>
-    
-    <div class="timeline-container">
-        <div class="timeline-header">
-            <span>🗓️ 09 Mar</span>
-            <span>Internship Timeline</span>
-            <span>27 Mag ✈️🥲</span>
-        </div>
-        <div class="timeline-slots">
-            <div class="slot active" title="W1"></div>
-            <div class="slot active" title="W2"></div>
-            <div class="slot active" title="W3"></div>
-            <div class="slot active" title="W4 completata!"></div>
-            <div class="slot"></div><div class="slot"></div>
-            <div class="slot"></div><div class="slot"></div><div class="slot"></div>
-            <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+    <div id="intro-overlay">
+        <div class="phone-mockup" id="phone">
+            <div class="phone-screen-small">
+                <button class="start-btn">Access Log</button>
+            </div>
         </div>
     </div>
 
-    <div class="achievements">
-        <div class="badge" title="Riprogettazione strutturale dello scenario">🏗️ Scenario Architect</div>
-        <div class="badge" title="Due round completi di Quality Assurance">🔍 Double QA</div>
-        <div class="badge" title="Pausa tattica per evitare il system overload">🔋 Standby Mode</div>
-        <div class="badge badge-old" title="W3 Badge">📉 Reality Check</div>
-        <div class="badge badge-old" title="W2 Badge">🔍 Reverse Engineer</div>
-    </div>
+    <div class="main-wrapper" id="content-wrapper">
+        <div class="terminal">
+            <header>
+                <div class="typewriter"><h1>> SKILLA_AI_LOG_W05</h1></div>
+                <div class="user-info">🧑‍💻 Davide | 🏢 Team AI Skilla | ✨ Building Consistency</div>
+                
+                <div class="timeline-container">
+                    <div class="timeline-header"><span>09 Mar</span><span>Week 5 / 12</span><span>27 Mag ✈️🥲</span></div>
+                    <div class="timeline-slots">
+                        <div class="slot active"></div><div class="slot active"></div><div class="slot active"></div><div class="slot active"></div><div class="slot active"></div>
+                        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+                    </div>
+                </div>
 
-    <div class="skills-matrix">
-        <div class="skill-row">
-            <div class="skill-name"><span>Logica Simulatori AI & Peer Review</span> <span>75%</span></div>
-            <div class="skill-bar-bg"><div class="skill-bar-fill fill-75"></div></div>
+                <div class="achievements">
+                    <div class="badge">✅ Luca.exe Loaded</div>
+                    <div class="badge">🏗️ Character Adaptation</div>
+                    <div class="badge">⚖️ Compliance 231 Done</div>
+                </div>
+
+                <div class="skills-matrix">
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Logica Simulatori AI</span><span>75%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 75%;"></div></div>
+                    </div>
+                    <div class="skill-row">
+                        <div class="skill-name"><span>Prompt Debugging</span><span>65%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 65%;"></div></div>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <h3 style="color: var(--glow-cyan); font-size: 1rem; margin-bottom: 10px;">📍 CURRENT LOG: WEEK 05</h3>
+                
+                <div class="module-block">
+                    <div class="module-title">MODULE 01: Character Success <span class="tag tag-success">MILESTONE</span></div>
+                    <p>Test del prompt di <strong>Luca</strong>: funziona! La riprogettazione logica ha pagato. Ora il modello risponde correttamente alle intenzioni formative.</p>
+                    <span class="mood">> LOG: Vedere Luca girare bene è una grande soddisfazione. È il "punto di prova" che mi serviva.</span>
+                </div>
+
+                <div class="module-block">
+                    <div class="module-title">MODULE 02: Scaling & Scaling <span class="tag tag-info">NEXT</span></div>
+                    <p>Inizio adattamento per Alice e Marta. Il template di Luca fa da base, ma ogni personaggio ha le sue sfumature.</p>
+                    <span class="mood">> LOG: Un po' di ansia da velocità; vorrei correre di più, ma la precisione in questa fase è tutto.</span>
+                </div>
+
+                <div class="module-block">
+                    <div class="module-title">MODULE 03: 231 Compliance <span class="tag tag-warn">DONE</span></div>
+                    <p>Completati i due corsi obbligatori sul D.Lgs. 231/01.</p>
+                </div>
+
+                <details class="archive">
+                    <summary>📂 ARCHIVIO (W1 - W4)</summary>
+                    <div style="padding: 10px; font-size: 0.75rem;">
+                        <p><strong>W4:</strong> Pivot scenario, test 2x, feedback Alba, ponte Pasquetta.</p>
+                        <p><strong>W3:</strong> Character Engineering, Reality Check test fallito (necessario pivot).</p>
+                        <p><strong>W2:</strong> UX/UI focus, Labirinto cartelle, Reverse Engineering simulatori.</p>
+                        <p><strong>W1:</strong> Onboarding, Matrice Eisenhower, corsi sicurezza.</p>
+                    </div>
+                </details>
+            </main>
+
+            <footer><p>_End of week 5: System online_ 🌍</p></footer>
         </div>
-        <div class="skill-row">
-            <div class="skill-name"><span>Prompt Debugging</span> <span>55%</span></div>
-            <div class="skill-bar-bg"><div class="skill-bar-fill fill-55"></div></div>
-        </div>
-        <div class="skill-row">
-            <div class="skill-name"><span>Pazienza Zen (Compliance)</span> <span>100% MAX</span></div>
-            <div class="skill-bar-bg"><div class="skill-bar-fill fill-100"></div></div>
-        </div>
-    </div>
-  </header>
-
-  <main>
-    <h3 style="color: var(--glow-cyan); margin-bottom: 15px; font-size: 1.1rem;">📍 CURRENT LOG: WEEK 04</h3>
-    
-    <div class="module-block">
-      <div class="module-title">MODULE 01: QA & Architecture Pivot 🏗️ <span class="tag tag-alert">ITERATION</span></div>
-      <p><strong>Task:</strong> Eseguiti 2 round di test sui simulatori. Decisione presa: riprendere il simulatore "Saper comunicare" ma ripensando da zero lo scenario narrativo e logico.</p>
-      <span class="mood">> LOG: Demolire per ricostruire meglio. È la prassi nell'AI design. Ora ho le idee più chiare su cosa funziona e cosa no.</span>
     </div>
 
-    <div class="module-block">
-      <div class="module-title">MODULE 02: Peer Review & Collaboration 🗣️ <span class="tag tag-creative">FEEDBACK</span></div>
-      <p><strong>Task:</strong> Call di allineamento con Alba per fornirle feedback strutturati sulle sue proposte di scenario.</p>
-      <span class="mood">> LOG: Molto utile. Analizzare il lavoro degli altri mi aiuta a mantenere l'obiettività e a trovare falle logiche che magari farei anch'io.</span>
-    </div>
+    <script>
+        function startEntry() {
+            const phone = document.getElementById('phone');
+            const intro = document.getElementById('intro-overlay');
+            const content = document.getElementById('content-wrapper');
 
-    <div class="module-block">
-      <div class="module-title">MODULE 03: Compliance Protocol 🛡️ <span class="tag tag-warn">COMPLETED</span></div>
-      <p><strong>Task:</strong> Terminato il corso obbligatorio su Equità di Genere.</p>
-      <span class="mood">> LOG: Protocollo aziendale completato e archiviato. Check sulla task list.</span>
-    </div>
-
-    <div class="module-block">
-      <div class="module-title">MODULE 04: System Standby 🔋 <span class="tag tag-holiday">OFFLINE</span></div>
-      <p><strong>Task:</strong> Venerdì feriale preso come ponte fino a Pasquetta.</p>
-      <span class="mood">> LOG: Felice della pausa, ma fremo per riprendere il progetto. Il tempo a disposizione non è infinito e voglio massimizzare l'output delle prossime 8 settimane!</span>
-    </div>
-
-    <details class="archive">
-        <summary>📂 ARCHIVIO LOG: SETTIMANE 01 - 03</summary>
-        <div class="archive-content">
+            // Avvia animazione zoom
+            phone.classList.add('zoom-effect');
             
-            <h4>WEEK 03</h4>
-            <div class="module-block">
-              <div class="module-title">MODULE 01: Character Engineering ⚙️ <span class="tag tag-success">HANDS-ON</span></div>
-              <p><strong>Task:</strong> Lavorato sui prompt di 3 personaggi per "Saper comunicare" (Alice, Luca, Marta).</p>
-              <span class="mood">> LOG: Divertente ma stressante per i continui micro-problemi. Ottimo allenamento.</span>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">MODULE 02: Beta Testing & Reality Check 📉 <span class="tag tag-alert">PIVOT</span></div>
-              <p><strong>Task:</strong> Call di test per il simulatore "Saper comunicare".</p>
-              <span class="mood">> LOG: Interessante ma deludente. L'intero scenario non è efficace, bisogna rimetterci mano. Un colpo duro, ma necessario.</span>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">MODULE 03: Knowledge Base Expansion 🧠 <span class="tag tag-info">UPSKILLING</span></div>
-              <p><strong>Task:</strong> Formazione Prompt Design, Video AI (Flow) e tool di orchestrazione.</p>
-              <span class="mood">> LOG: L'orchestrazione ha attirato tutta la mia attenzione. Da approfondire.</span>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">MODULE 04: Compliance Protocol 🛡️ <span class="tag tag-warn">COMPLETED</span></div>
-              <p><strong>Task:</strong> Completato training sulle molestie di genere.</p>
-            </div>
-
-            <h4>WEEK 02</h4>
-            <div class="module-block">
-              <div class="module-title">LUNEDÌ: Foundations & Aesthetics 🎨</div>
-              <p>Corso "Saper comunicare", call aggiornamenti e focus su UX/UI.</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">MARTEDÌ: Folder Labyrinth 📁</div>
-              <p>Primo vero "hands-on" sul simulatore e call allineamento.</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">MERCOLEDÌ: Reverse Engineering 🔍</div>
-              <p>Studio e comparazione dei simulatori già completi per studiarne la logica.</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">GIOVEDÌ: Agentic Ideas 💡</div>
-              <p>Primi appunti sul simulatore. Corso Agentic AI, scoperto il tool "Manus".</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">VENERDÌ: Energy Saving Mode 🔋</div>
-              <p>Scrittura simulatore, feedback finale simulatore Martina e corso compliance.</p>
-            </div>
-
-            <h4>WEEK 01</h4>
-            <div class="module-block">
-              <div class="module-title">LUNEDÌ: System Booting 🚀</div>
-              <p>Onboarding, setup dispositivi e mail aziendale. Prima partecipazione call Simulatori AI.</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">MARTEDÌ: Logic & Priority 🧠</div>
-              <p>Webinar Problem Solving (Matrice Eisenhower) e corsi sicurezza.</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">MERCOLEDÌ: Firewall Phase 🛡️</div>
-              <p>Corso Cyberserenity.</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">GIOVEDÌ: Neural Clarity 💡</div>
-              <p>Riunione Simulatore Ari, feedback tecnici e corso GDPR.</p>
-            </div>
-
-            <div class="module-block">
-              <div class="module-title">VENERDÌ: Future Loading... 🔮</div>
-              <p>Feedback Video AI e inizio corso per Simulatore Marta.</p>
-            </div>
-
-        </div>
-    </details>
-
-  </main>
-
-  <footer>
-    <p>_End of week 4: Pivot registered. Systems resting. Ready for W5._ 🌍</p>
-  </footer>
-</div>
-
+            // Nasconde overlay e mostra contenuto
+            setTimeout(() => {
+                intro.style.display = 'none';
+                content.classList.add('visible');
+            }, 800);
+        }
+    </script>
 </body>
 </html>
